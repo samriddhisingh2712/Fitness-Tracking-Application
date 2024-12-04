@@ -1,0 +1,73 @@
+// DOM Elements
+const workoutForm = document.getElementById('workoutForm');
+const workoutList = document.getElementById('workoutList');
+
+let workouts = []; // Array to store workout data
+
+// Add Workout Event
+workoutForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Form Input Values
+    const username = document.getElementById('username').value.trim();
+    const date = document.getElementById('date').value;
+    const activity = document.getElementById('activity').value;
+    const duration = document.getElementById('duration').value;
+
+    // Validate Inputs
+    if (!validateForm(username, date, activity, duration)) return;
+
+    // Add Workout
+    const workout = { username, date, activity, duration };
+    workouts.push(workout);
+    renderWorkoutList();
+
+    // Clear Form
+    workoutForm.reset();
+});
+
+// Render Workouts in Table
+function renderWorkoutList() {
+    workoutList.innerHTML = ''; // Clear previous rows
+    workouts.forEach((workout, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${workout.username}</td>
+            <td>${workout.date}</td>
+            <td>${workout.activity}</td>
+            <td>${workout.duration}</td>
+            <td>
+                <button class="btn btn-danger btn-sm" onclick="deleteWorkout(${index})">Delete</button>
+            </td>
+        `;
+        workoutList.appendChild(row);
+    });
+}
+
+// Delete Workout
+function deleteWorkout(index) {
+    workouts.splice(index, 1);
+    renderWorkoutList();
+}
+
+// Validate Form Inputs
+function validateForm(username, date, activity, duration) {
+    if (username.length < 3) {
+        alert('Username must be at least 3 characters long.');
+        return false;
+    }
+    if (!date) {
+        alert('Please select a valid date.');
+        return false;
+    }
+    if (!activity) {
+        alert('Please select an activity.');
+        return false;
+    }
+    if (duration <= 0) {
+        alert('Duration must be a positive number.');
+        return false;
+    }
+    return true;
+}
