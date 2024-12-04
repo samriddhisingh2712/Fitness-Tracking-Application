@@ -1,0 +1,27 @@
+body {
+    background-color: #f5f7fa;
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    color: #28a745;
+}
+
+.card {
+    border-radius: 8px;
+    border: 1px solid #eaeaea;
+    background-color: #ffffff;
+}
+
+.table {
+    background-color: #ffffff;
+}
+
+button {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+button:hover {
+    background-color: #218838;
+}
